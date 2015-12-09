@@ -12,9 +12,9 @@ my $directions = do { local $/ = undef; open my $fh, '<', './input'; <$fh> };
 
 # Follow our orders, deliver presents
 foreach my $order (split //, $directions) {
-    state $sx ||= 0; state $sy ||= 0;   # Santa Coords
-    state $rx ||= 0; state $ry ||= 0;   # Robo Santa Coords
-    state $count ||= 0; ++$count;
+    state $sx = 0; state $sy = 0;   # Santa Coords
+    state $rx = 0; state $ry = 0;   # Robo Santa Coords
+    state $count = 0; ++$count;
 
     my ($x, $y) = $count % 2 ? (\$sx, \$sy) : (\$rx, \$ry);
     if ($order eq '^') {

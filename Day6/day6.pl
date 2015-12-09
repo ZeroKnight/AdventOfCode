@@ -9,7 +9,7 @@ use v5.10; # state
 
 my %lightgrid;
 my @instructions;
-open my $fh, '<', './input';
+open my $fh, '<', './input' or die "$0: can't open input for reading: $!";
 while (<$fh>) {
     chomp;
     push @instructions, $_;

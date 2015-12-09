@@ -6,9 +6,14 @@
 use strict;
 use warnings;
 
-my @manifest = read_manifest('./input');
 my $total_paper;
 my $total_ribbon;
+my @manifest;
+open my $fh, '<', './input' or die "$0: can't open input for reading: $!";
+while (<$fh>) {
+    chomp;
+    push @manifest, $_;
+}
 
 foreach my $present (@manifest) {
     $total_paper += area_paper(split /x/, $present);
@@ -47,18 +52,5 @@ sub area_ribbon {
     my $bow_length = $l*$w*$h;
 
     return $wrap_length + $bow_length;
-}
-
-sub read_manifest {
-    my $fn = shift;
-    my @manifest;
-
-    open my $fh, '<', $fn or die "$0: can't open $fn for reading: $!";
-    while (<$fh>) {
-        chomp;
-        push @manifest, $_;
-    }
-
-    return @manifest;
 }
 

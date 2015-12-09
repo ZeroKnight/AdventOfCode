@@ -6,13 +6,12 @@
 use strict;
 use warnings;
 
-my $fn = './input';
 my $floor;
 my $total_steps;
 my @basement;
 
 # Get our directions
-open(my $fh, '<', $fn) or die "$0: can't open $fn for reading: $!";
+open(my $fh, '<', './input') or die "$0: can't open input for reading: $!";
 my @directions = split(//, do { local $/; <$fh>; });
 close $fh;
 

@@ -8,12 +8,8 @@ use warnings;
 use v5.10; # state
 
 my %lightgrid;
-my @instructions;
-open my $fh, '<', './input' or die "$0: can't open input for reading: $!";
-while (<$fh>) {
-    chomp;
-    push @instructions, $_;
-}
+open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
+chomp(my @instructions = <$fh>);
 close $fh;
 
 foreach (@instructions) {

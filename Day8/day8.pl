@@ -10,12 +10,8 @@ my $total_litchars;
 my $total_memchars;
 my $total_encchars;
 
-my @list;
-open my $fh, '<', './input' or die "$0: can't open input for reading: $!";
-while (<$fh>) {
-    chomp;
-    push @list, $_;
-}
+open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
+chomp(my @list = <$fh>);
 close $fh;
 
 # Part 1

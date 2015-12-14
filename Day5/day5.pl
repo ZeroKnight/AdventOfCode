@@ -6,13 +6,9 @@
 use strict;
 use warnings;
 
-my @stringlist;
-my @nicestrings;
-open my $fh, '<', './input';
-while (<$fh>) {
-    chomp;
-    push @stringlist, $_;
-}
+open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
+chomp(my @stringlist = <$fh>);
+close $fh;
 
 foreach my $str (@stringlist) {
     # Part 1

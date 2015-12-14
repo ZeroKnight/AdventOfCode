@@ -8,12 +8,9 @@ use warnings;
 
 my $total_paper;
 my $total_ribbon;
-my @manifest;
-open my $fh, '<', './input' or die "$0: can't open input for reading: $!";
-while (<$fh>) {
-    chomp;
-    push @manifest, $_;
-}
+open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
+chomp(my @manifest = <$fh>);
+close $fh;
 
 foreach my $present (@manifest) {
     $total_paper += area_paper(split /x/, $present);

@@ -5,7 +5,7 @@
 
 use strict;
 use warnings;
-use Algorithm::Combinatorics qw/subsets combinations/;
+use Algorithm::Combinatorics qw/subsets/;
 
 my $total_liters = 150;
 open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";

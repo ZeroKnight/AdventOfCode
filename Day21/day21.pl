@@ -36,15 +36,7 @@ my %shop = (
     },
 );
 
-open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-chomp(my @stats = <$fh>);
-close $fh;
-my %boss = (
-    hp  => (split(/ /, $stats[0]))[-1],
-    atk => (split(/ /, $stats[1]))[-1],
-    def => (split(/ /, $stats[2]))[-1],
-);
-
+my %boss = ( hp => 100, atk => 8, def => 2 );
 my %player = (
     hp     => 100,
     Weapon => undef,

@@ -8,12 +8,12 @@ use warnings;
 
 # Part 1
 my $heading = 0;
-my @blocks = qw/0 0 0 0/; # North East South West
+my ($x, $y) = (0, 0);
 
 # Part 2
 my %city = ( 0 => { 0 => 1 } );
-my ($x, $y) = (0, 0);
-my $foundHQ = 0;
+my $distanceHQ = 0;
+my @hq;
 
 open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
 foreach my $step (split(/, /, do { local $/; <$fh>; }))
@@ -27,26 +27,23 @@ foreach my $step (split(/, /, do { local $/; <$fh>; }))
   {
     $heading = --$heading % 4
   }
-  $blocks[$heading] += $count;
 
-  unless ($foundHQ) {
-    foreach (1..$count)
-    {
-      ++$y if $heading == 0;
-      ++$x if $heading == 1;
-      --$y if $heading == 2;
-      --$x if $heading == 3;
+  foreach (1..$count) {
+    ++$y if $heading == 0;
+    ++$x if $heading == 1;
+    --$y if $heading == 2;
+    --$x if $heading == 3;
 
+    unless ($distanceHQ) {
       if (++$city{$x}{$y} == 2)
       {
-        $foundHQ = 1;
-        last;
+        $distanceHQ = abs($x + $y);
+        @hq = ($x, $y);
       }
     }
   }
 }
+my $distance = abs($x - $y);
 
-my $distance = abs($blocks[0] - $blocks[2]) + abs($blocks[1] - $blocks[3]);
-my $distance2 = abs($x + $y);
 print "Part 1: $distance\n";
-print "Part 2: $distance2 ($x,$y)\n";
+print "Part 2: $distanceHQ ($hq[0], $hq[1])\n";

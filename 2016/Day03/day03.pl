@@ -6,16 +6,33 @@
 use strict;
 use warnings;
 
-my $valid;
+my $set = -1;
+my @valid;
+my @tris;
+
 open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-while (my $line = <$fh>)
+my @input = <$fh>;
+
+foreach my $line (@input)
 {
-  my @tri = (split /\s+/, $line =~ s/^\s+//r);
-  $tri[0] + $tri[1] > $tri[2] or next;
-  $tri[0] + $tri[2] > $tri[1] or next;
-  $tri[1] + $tri[2] > $tri[0] or next;
-  ++$valid;
+  $set = ++$set % 3;
+  @tris[$set] = [split /\s+/, $line =~ s/^\s+//r];
+
+  if ($set == 2)
+  {
+    foreach (0..2)
+    {
+      ++$valid[0] if isTri($tris[$_][0], $tris[$_][1], $tris[$_][2]); # Part 1
+      ++$valid[1] if isTri($tris[0][$_], $tris[1][$_], $tris[2][$_]); # Part 2
+    }
+  }
 }
 
-print "Part 1: $valid\n";
+print "Part 1: $valid[0]\n";
+print "Part 2: $valid[1]\n";
 
+sub isTri
+{
+  my ($a, $b, $c) = @_;
+  return 1 if ($a + $b > $c) && ($a + $c > $b) && ($b + $c > $a);
+}

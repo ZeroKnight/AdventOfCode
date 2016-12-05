@@ -12,7 +12,8 @@ my $input = 'ojvtpuvg';
 my $password = '';
 my $index;
 
-print "Hacking password for door ID $input ... ";
+print "\e[?25l"; # Disable cursor
+print "Hacking password for door ID '$input' ... ";
 while (1)
 {
   local $| = 1;
@@ -34,3 +35,4 @@ while (1)
 }
 
 print " [DONE]\n";
+print "\e[?25h"; # Enable cursor

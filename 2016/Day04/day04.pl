@@ -33,7 +33,7 @@ ROOM: while (my $line = <$fh>)
   $rooms{$name} = $sectorid;
 }
 
-assert(rot(343, 'qzmt-zixmtkozy-ivhz') eq 'very encrypted name') if DEBUG;
+# assert(rot(343, 'qzmt-zixmtkozy-ivhz') eq 'very encrypted name') if DEBUG;
 foreach my $room (keys %rooms)
 {
   if (rot($rooms{$room}, $room) =~ /.*north.*pole.*object.*/)
@@ -49,7 +49,6 @@ print "Part 2: Sector ID of 'North Pole Objects' room: $target\n";
 sub rot
 {
   my ($shift, $str) = @_;
-  my $delta = $shift % 26;
   my $digest;
 
   foreach my $c (split //, $str)
@@ -60,8 +59,7 @@ sub rot
     }
     else
     {
-      my $shifted = ord($c) + $delta;
-      $c = $shifted > 122 ? chr(($shifted - 123) + 97) : chr($shifted);
+      $c = chr(((ord($c) - 97 + $shift) % 26) + 97);
     }
     $digest .= $c;
   }

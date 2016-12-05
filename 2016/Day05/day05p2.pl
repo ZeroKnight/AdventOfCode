@@ -14,7 +14,7 @@ my $index;
 
 print "\e[?25l"; # Disable cursor
 print "Hacking password for door ID '$input' ... ";
-while (1)
+while (scalar @password < 8)
 {
   local $| = 1;
 
@@ -44,7 +44,6 @@ while (1)
       $password[$pos] = substr $hash, 6, 1 unless defined $password[$pos];
     }
   }
-  last if scalar @password == 8;
   print "\b" x 8;
 }
 

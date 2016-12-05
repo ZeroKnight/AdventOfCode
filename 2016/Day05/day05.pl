@@ -14,7 +14,7 @@ my $index;
 
 print "\e[?25l"; # Disable cursor
 print "Hacking password for door ID '$input' ... ";
-while (1)
+while (length(password) < 8)
 {
   local $| = 1;
 
@@ -26,7 +26,6 @@ while (1)
   {
     $password .= substr $hash, 5, 1;
     print "\b" x length($display) . substr($password, -1, 1);
-    last if length($password) == 8;
   }
   else
   {

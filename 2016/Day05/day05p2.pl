@@ -11,16 +11,15 @@ use Digest::MD5 qw/md5_hex/;
 my $input = 'ojvtpuvg';
 my @password = ();
 my $index;
+my $found = 0;
 
 print "\e[?25l"; # Disable cursor
 print "Hacking password for door ID '$input' ... ";
-while (scalar @password < 8)
+while (1)
 {
   local $| = 1;
 
   my $hash = md5_hex($input.$index++);
-  # my $display = substr $hash, length($password), (8 - length($password));
-  # print "$display";
 
   my $n = 0;
   foreach (split(//, substr($hash, 5, 8)))
@@ -35,13 +34,18 @@ while (scalar @password < 8)
     }
     ++$n;
   }
+  last if $found == 8;
 
   if ($hash =~ /^00000/)
   {
     my $pos = substr $hash, 5, 1;
     if ($pos =~ /\d/ and $pos < 8)
     {
-      $password[$pos] = substr $hash, 6, 1 unless defined $password[$pos];
+      if (!defined($password[$pos]))
+      {
+        $password[$pos] = substr($hash, 6, 1);
+        ++$found;
+      }
     }
   }
   print "\b" x 8;

@@ -18,7 +18,10 @@
 
 ### Optimizations:
 
- * If a lower floor is empty, don't try to move anything back down to it
+ * ~~If a lower floor is empty, don't try to move anything back down to it~~
+
+    + Not doing this actually earned me significantly faster runtime. Part 1 was
+      50% faster, and Part 2 was 74% faster!
 
  * Keep track of previously visited states and don't follow them again
 

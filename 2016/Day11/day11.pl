@@ -80,7 +80,6 @@ sub A_star {
         # Initialize state of next move
         my $new_floor = $floor + $dir;
         next unless 0 <= $new_floor && $new_floor <= 3;
-        next if $dir == -1 and @{$current->{floors}[$new_floor]} == 0;
         my $next = move_if_valid($move, $new_floor, $current);
         next unless defined $next;
 

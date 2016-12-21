@@ -1,0 +1,39 @@
+### Diagram of Input
+
+   F4: .   .   .   .   .   .   .   .   .   .
+   F3: .   .   .   .   .   .   PmG PmM RuG RuM
+   F2: .   .   .   PuM .   SrM .   .   .   .
+   F1: TmG TmM PuG .   SrG .   .   .   .   .
+
+### Rules
+
+ * Elevator MUST have at least one microchip or generator to move
+
+ * Max 2 items on the elevator at one time
+
+ * Elevator stops at each floor to recharge, each stop counts as 1 move
+
+ * A chip will fry if it stops on the same floor as an RTG, UNLESS it will end
+   up on the same floor as its corresponding RTG
+
+### Optimizations:
+
+ * If a lower floor is empty, don't try to move anything back down to it
+
+ * Keep track of previously visited states and don't follow them again
+
+   + Zobrist Hashing is a cheap and fast way to hash a "game" state
+
+   + **KEY**: Pairs of differing elements are all **equivalent**!
+     (HG@f1, HM@f2) and (LiG@f1, LiM@f2) are interchangeable and thus equivalent
+     states which can be pruned. You could use either state and end up with the
+     same number of moves.
+
+ * Whenever possible, move 2 items UP instead of 1, and 1 item DOWN instead of 2
+
+### Other Notes:
+
+ * Generators can safely be moved to floors with other generators
+
+ * Chips can safely be moved to floors with zero or more chips
+

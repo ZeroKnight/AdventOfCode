@@ -45,7 +45,8 @@ foreach my $elem (qw/Tm Pu Sr Pm Ru El Di/)
   }
 }
 
-sub zhash {
+sub zhash
+{
   my $h = $ztable{elevator}[$_[0]->{elevator}];
   while (my ($elem, $pair) = each %{$_[0]->{pairs}})
   {
@@ -55,7 +56,8 @@ sub zhash {
   return $h;
 }
 
-sub A_star {
+sub A_star
+{
   my $goal = pop;
   my $frontier = Array::Heap::PriorityQueue::Numeric->new();
   $frontier->add($_[0], 0);

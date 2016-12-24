@@ -11,8 +11,10 @@ use Term::ANSIColor;
 use Array::Heap::PriorityQueue::Numeric;
 
 my $magic = 1350;
-my ($maxw, $maxh) = (49, 49);
+my ($maxw, $maxh) = (49,49);
 my @office;
+my $p1 = '31,39';
+my $p2 = '50';
 
 foreach my $x (0..$maxw)
 {
@@ -22,8 +24,12 @@ foreach my $x (0..$maxw)
   }
 }
 
-my $optimal = A_star('1,1', '31,39');
-say "Fewest steps required: $optimal";
+die "Goal is a wall!\n" if is_wall(split /,/, $p1);
+
+my $optimal = A_star('1,1', $p1);
+my $n50 = bfs('1,1', $p2);
+say "Fewest steps required to reach ($p1): $optimal";
+say "Number of locations reachable in $p2 steps: $n50";
 
 sub A_star
 {
@@ -59,6 +65,38 @@ sub A_star
       }
     }
   }
+}
+
+sub bfs
+{
+  my ($start, $max_steps) = @_;
+  my @frontier = ($start);
+  my %cost_so_far = ($start => 0);
+
+  while (@frontier)
+  {
+    my $current = pop @frontier;
+    foreach my $next (neighbors($current))
+    {
+      # Check validity of coord
+      my ($x, $y) = split /,/, $next;
+      next if ($x < 0 or $x > $maxw) or ($y < 0 or $y > $maxh);
+      next if is_wall($x, $y);
+
+      unless (grep { $_ eq $next } keys %cost_so_far)
+      {
+        unshift @frontier, $next;
+        $cost_so_far{$next} = $cost_so_far{$current} + 1;
+      }
+    }
+  }
+  my @nodes_in_50;
+  while (my ($k, $v) = each %cost_so_far)
+  {
+    push @nodes_in_50, $k if $v <= $max_steps;
+  }
+  draw_visited(@nodes_in_50);
+  return scalar @nodes_in_50;
 }
 
 sub heuristic
@@ -123,5 +161,25 @@ sub draw_path
     # Wait
     select(undef, undef, undef, 0.05);
   }
+}
+
+sub draw_visited
+{
+  my @visited = @_;
+  my @o = map { [@$_] } @office;
+
+  foreach my $node (@visited)
+  {
+    my ($x, $y) = split /,/, $node;
+    $o[$x][$y] = colored('o', 'magenta');
+  }
+
+  # Mark starting point
+  $o[1][1] = colored('@', 'yellow');
+
+  # Clear screen and draw
+  print "\033[2J";
+  print "\033[0;0H";
+  do { local $" = ''; say "@$_" foreach @o };
 }
 

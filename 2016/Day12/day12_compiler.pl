@@ -7,7 +7,7 @@ use v5.14;
 use strict;
 use warnings;
 
-my $C = 0;
+my $C = 1;
 my @input = <>;
 chomp @input;
 my $fn = 'day12.p.cpp';

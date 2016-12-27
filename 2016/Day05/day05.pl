@@ -14,7 +14,7 @@ my $index;
 
 print "\e[?25l"; # Disable cursor
 print "Hacking password for door ID '$input' ... ";
-while (length(password) < 8)
+while (length($password) < 8)
 {
   local $| = 1;
 

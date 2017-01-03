@@ -16,8 +16,9 @@ my ($p1, $p2);
 #
 # n = 2^a + l
 # w(n) = 2l + 1
-# After l moves, there is a power of 2 remaining people, and so the winner is
-# who starts, hence 2l + 1
+# After l moves, there is a power of 2 remaining people. When this happens, the
+# winner is the who starts. In this case, it is the person after l moves have
+# been made, hence 2l + 1.
 my $nearest_pow2 = 2 ** int(log($input) / log(2));
 $p1 = ($input - $nearest_pow2) * 2 + 1;
 

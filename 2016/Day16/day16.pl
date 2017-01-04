@@ -4,7 +4,6 @@
 # http://adventofcode.com/2016/day/16
 
 use v5.14;
-use strict;
 use warnings;
 
 my $input = '11110010111001001';

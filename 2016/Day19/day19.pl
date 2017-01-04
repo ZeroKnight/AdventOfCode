@@ -6,7 +6,6 @@
 # The Josephus Problem
 
 use v5.14;
-use strict;
 use warnings;
 
 my $input = shift // 3012210;

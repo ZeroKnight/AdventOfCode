@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
 
-# Advent of Code 2016: Day 9 Part 2
+# Advent of Code 2016: Day 9 (Part 2)
 # http://adventofcode.com/2016/day/9
 
-use strict;
+use v5.14;
 use warnings;
 
 my $dlength = 0;
@@ -13,7 +13,7 @@ while (<>)
   chomp;
   $dlength += rexpand($_);
 }
-print "Decompressed length: $dlength\n";
+say "Decompressed length: $dlength";
 
 sub rexpand
 {

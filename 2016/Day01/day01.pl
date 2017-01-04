@@ -3,7 +3,7 @@
 # Advent of Code 2016: Day 1
 # http://adventofcode.com/2016/day/1
 
-use strict;
+use v5.14;
 use warnings;
 
 # Part 1
@@ -15,8 +15,7 @@ my %city = ( 0 => { 0 => 1 } );
 my $distanceHQ = 0;
 my @hq;
 
-open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-foreach my $step (split(/, /, do { local $/; <$fh>; }))
+foreach my $step (split(/, /, do { local $/; <>; }))
 {
   my $count = substr($step, 1);
   if (substr($step, 0, 1) eq 'R')
@@ -45,5 +44,5 @@ foreach my $step (split(/, /, do { local $/; <$fh>; }))
 }
 my $distance = abs($x - $y);
 
-print "Part 1: $distance\n";
-print "Part 2: $distanceHQ ($hq[0], $hq[1])\n";
+say "Part 1: $distance";
+say "Part 2: $distanceHQ ($hq[0], $hq[1])";

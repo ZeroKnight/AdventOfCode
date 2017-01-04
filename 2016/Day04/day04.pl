@@ -3,10 +3,9 @@
 # Advent of Code 2016: Day 4
 # http://adventofcode.com/2016/day/4
 
-use strict;
+use v5.14;
 use warnings;
 
-use Carp::Assert;
 use List::Util qw/sum/;
 
 my %rooms;
@@ -33,7 +32,6 @@ ROOM: while (my $line = <$fh>)
   $rooms{$name} = $sectorid;
 }
 
-# assert(rot(343, 'qzmt-zixmtkozy-ivhz') eq 'very encrypted name') if DEBUG;
 foreach my $room (keys %rooms)
 {
   if (rot($rooms{$room}, $room) =~ /.*north.*pole.*object.*/)
@@ -43,8 +41,8 @@ foreach my $room (keys %rooms)
   }
 }
 
-print "Part 1: ".(scalar keys %rooms)." valid rooms whose sector ids sum to ".sum(values %rooms)."\n";
-print "Part 2: Sector ID of 'North Pole Objects' room: $target\n";
+say "Part 1: ".(scalar keys %rooms)." valid rooms whose sector ids sum to ".sum(values %rooms);
+say "Part 2: Sector ID of 'North Pole Objects' room: $target";
 
 sub rot
 {

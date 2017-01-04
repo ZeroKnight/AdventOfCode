@@ -1,13 +1,12 @@
 #!/usr/bin/env perl
 
-# Advent of Code 2016: Day 9 Part 1
+# Advent of Code 2016: Day 9 (Part 1)
 # http://adventofcode.com/2016/day/9
 
-use strict;
+use v5.14;
 use warnings;
 
-my $data = <>;
-chomp $data;
+chomp(my $data = <>);
 my $dlength = 0;
 
 for (my $i = 0; $i < length($data); ++$i)
@@ -20,7 +19,7 @@ for (my $i = 0; $i < length($data); ++$i)
   else { ++$dlength }
 }
 
-print "Decompressed length: $dlength\n";
+say "Decompressed length: $dlength";
 
 sub expand_at
 {

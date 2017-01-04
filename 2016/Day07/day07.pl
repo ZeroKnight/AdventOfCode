@@ -3,14 +3,13 @@
 # Advent of Code 2016: Day 7
 # http://adventofcode.com/2016/day/7
 
-use strict;
+use v5.14;
 use warnings;
 
 my @tls_ips;
 my @ssl_ips;
 
-open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-my @lines = <$fh>;
+chomp(my @lines = <>);
 foreach my $addr (@lines)
 {
   chomp $addr;
@@ -116,5 +115,5 @@ sub aba
   }
 }
 
-print "There are ".@tls_ips." TLS IPs\n";
-print "There are ".@ssl_ips." TLS IPs\n";
+say "There are ".@tls_ips." TLS IPs";
+say "There are ".@ssl_ips." TLS IPs";

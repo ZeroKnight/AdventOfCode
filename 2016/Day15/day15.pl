@@ -4,7 +4,6 @@
 # http://adventofcode.com/2016/day/15
 
 use v5.14;
-use strict;
 use warnings;
 
 my $time = 0;

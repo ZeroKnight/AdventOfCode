@@ -3,14 +3,13 @@
 # Advent of Code 2016: Day 6
 # http://adventofcode.com/2016/day/6
 
-use strict;
+use v5.14;
 use warnings;
 
 my %columns;
 my $message;
 my $message2;
-open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-while (my $line = <$fh>)
+while (my $line = <>)
 {
   chomp $line;
   my $n = 0;
@@ -27,5 +26,5 @@ foreach (0..(scalar keys %columns) - 1)
   $message2 .= (sort { $columns{$_}{$a} <=> $columns{$_}{$b} } keys %{$columns{$_}})[0];
 }
 
-print "Part 1: $message\n";
-print "Part 2: $message2\n";
+say "Part 1: $message";
+say "Part 2: $message2";

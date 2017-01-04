@@ -1,9 +1,9 @@
 #!/usr/bin/env perl
 
-# Advent of Code 2016: Day 5
+# Advent of Code 2016: Day 5 (Part 1)
 # http://adventofcode.com/2016/day/5
 
-use strict;
+use v5.14;
 use warnings;
 
 use Digest::MD5 qw/md5_hex/;
@@ -33,5 +33,5 @@ while (length($password) < 8)
   }
 }
 
-print " [DONE]\n";
+say " [DONE]";
 print "\e[?25h"; # Enable cursor

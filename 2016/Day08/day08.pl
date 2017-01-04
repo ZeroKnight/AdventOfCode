@@ -3,7 +3,7 @@
 # Advent of Code 2016: Day 8
 # http://adventofcode.com/2016/day/8
 
-use strict;
+use v5.14;
 use warnings;
 
 my ($lcd_w, $lcd_h) = (50, 6);
@@ -43,7 +43,7 @@ while (<>)
   draw_lcd();
 }
 
-print "There are ".pixel_count()." pixels lit\n";
+say "There are ".pixel_count()." pixels lit";
 
 sub rect
 {
@@ -103,7 +103,6 @@ sub pixel_count
 
 sub draw_lcd
 {
-  use feature 'say';
   local $" = '';
 
   # Clear screen

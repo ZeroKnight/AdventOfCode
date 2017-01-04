@@ -4,7 +4,6 @@
 # http://adventofcode.com/2016/day/14
 
 use v5.14;
-use strict;
 use warnings;
 
 use Digest::MD5 'md5_hex';

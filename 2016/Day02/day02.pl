@@ -3,7 +3,7 @@
 # Advent of Code 2016: Day 2
 # http://adventofcode.com/2016/day/2
 
-use strict;
+use v5.14;
 use warnings;
 
 my @code;
@@ -60,6 +60,6 @@ while (my $line = <$fh>)
   $code[1] .= $state[1];
 }
 
-print "Part 1: $code[0]\n";
-print "Part 2: $code[1]\n";
+say "Part 1: $code[0]";
+say "Part 2: $code[1]";
 

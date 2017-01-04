@@ -4,7 +4,6 @@
 # http://adventofcode.com/2016/day/18
 
 use v5.14;
-use strict;
 use warnings;
 
 chomp(my $input = <>);

@@ -3,15 +3,14 @@
 # Advent of Code 2016: Day 3
 # http://adventofcode.com/2016/day/3
 
-use strict;
+use v5.14;
 use warnings;
 
 my $set = -1;
 my @valid;
 my @tris;
 
-open my $fh, '<', './input' or die "$0: can't open './input' for reading: $!";
-my @input = <$fh>;
+my @input = <>;
 
 foreach my $line (@input)
 {
@@ -28,8 +27,8 @@ foreach my $line (@input)
   }
 }
 
-print "Part 1: $valid[0]\n";
-print "Part 2: $valid[1]\n";
+say "Part 1: $valid[0]";
+say "Part 2: $valid[1]";
 
 sub isTri
 {

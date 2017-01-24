@@ -37,7 +37,7 @@ foreach (@instructions) {
     } elsif (/^toggle/) {
         for (my $x = $bound1[0]; $x <= $bound2[0]; ++$x) {
             for (my $y = $bound1[1]; $y <= $bound2[1]; ++$y) {
-                $lightgrid{$x}{$y}{p1} = !$lightgrid{$x}{$y};
+                $lightgrid{$x}{$y}{p1} = !$lightgrid{$x}{$y}{p1};
                 $lightgrid{$x}{$y}{p2} += 2;
             }
         }

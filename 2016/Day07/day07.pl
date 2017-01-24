@@ -116,4 +116,4 @@ sub aba
 }
 
 say "There are ".@tls_ips." TLS IPs";
-say "There are ".@ssl_ips." TLS IPs";
+say "There are ".@ssl_ips." SSL IPs";

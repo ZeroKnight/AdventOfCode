@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Advent of Code 2016: Day 22 Grid Printer
+# Advent of Code 2016: Day 22 - Grid Printer
 # http://adventofcode.com/2016/day/22
 
 use v5.14;

@@ -12,7 +12,6 @@ my @ssl_ips;
 chomp(my @lines = <>);
 foreach my $addr (@lines)
 {
-  chomp $addr;
   my @chars = split //, $addr;
   my ($in_hypernet, $valid_tls) = (0, 0);
   for (my $i = 0; $i < length($addr); ++$i)

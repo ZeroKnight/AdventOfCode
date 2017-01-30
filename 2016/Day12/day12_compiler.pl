@@ -1,14 +1,13 @@
 #!/usr/bin/env perl
 
-# Advent of Code 2016: Day 12
+# Advent of Code 2016: Day 12 - Compiler Approach
 # http://adventofcode.com/2016/day/12
 
 use v5.14;
 use warnings;
 
 my $C = 1;
-my @input = <>;
-chomp @input;
+chomp(my @input = <>);
 my $fn = 'day12.p.cpp';
 open my $fh, '>', $fn or die "Can't open $fn for writing: $!";
 

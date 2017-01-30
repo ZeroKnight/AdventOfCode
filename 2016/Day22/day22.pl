@@ -64,7 +64,6 @@ sub p2
     if ($current eq $adjacent)
     {
       $moves = $cost_so_far{$current};
-      $empty = $current;
       last;
     }
     foreach my $node (neighbors($current))

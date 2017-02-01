@@ -12,7 +12,6 @@ use Array::Heap::PriorityQueue::Numeric;
 
 my @grid;
 my %poi;
-my %paths;
 for (my $i = 0; my $line = <>; ++$i)
 {
   chomp $line;
@@ -25,15 +24,29 @@ for (my $i = 0; my $line = <>; ++$i)
   @grid[$i] = [@chars];
 }
 
+# Pre-compute distance between all vertex pairs
+# NOTE: We could also use Floyd-Warshall or Johnson's here as well.
+my %dists;
+foreach my $i (keys %poi)
+{
+  foreach my $j (keys %poi)
+  {
+    next if $i == $j;
+    $dists{$i}{$j} = A_star($poi{$i}, $poi{$j});
+  }
+}
+
+# Find the shortest path
+my %paths;
 my $p = new List::Permutor(grep { $_ != 0 } keys %poi);
 while (my @set = $p->next)
 {
   my $moves;
-  my $from = $poi{0};
-  foreach my $point (@set, 0)
+  my $start = 0;
+  foreach my $point (@set) # For Part 2, use (@set, 0)
   {
-    $moves += A_star($from, $poi{$point});
-    $from = $poi{$point};
+    $moves += $dists{$start}{$point};
+    $start = $point;
   }
   my $s = join '', @set;
   $paths{$s} = $moves;

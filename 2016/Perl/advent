@@ -1,0 +1,92 @@
+#!/usr/bin/env perl
+
+use v5.14;
+use warnings;
+
+use Getopt::Long qw(:config gnu_getopt);
+use Time::HiRes  qw(gettimeofday tv_interval);
+
+my $opt_help;
+my $opt_time  = 'yes';
+my $opt_part  = 'both';
+GetOptions('time|t=s' => \$opt_time,
+           'part|p=s' => \$opt_part,
+           'help|h'   => \$opt_help,
+) or $opt_help = 1;
+
+if ($opt_help)
+{
+  say <<EOH;
+Advent of Code *
+Usage: $0 [OPTIONS] [DAY...]
+
+Runs the Perl solution for the given day(s) specified. If no DAY is specified,
+run all available days. By default, both parts are run.
+
+Options:
+
+    -h, --help
+      Display this message.
+
+    -p, --part <WHAT>
+      What part(s) for each Day should be run. WHAT can be 1, 2, or 'both'.
+      Defaults to 'both'.
+
+    -t, --time <WHAT>
+      Output solution run time. WHAT can be 'no', 'yes', or 'total' Defaults to
+      'yes'.
+EOH
+  exit;
+}
+
+my $t_sum;
+my $part1 = 1 if $opt_part =~ /(both|1)/n;
+my $part2 = 1 if $opt_part =~ /(both|2)/n;
+
+@ARGV = ('01'..'25') unless @ARGV;
+while (my $day = shift)
+{
+  my $t;
+  $day = "0$day" if $day =~ /^\d$/;    # Ensure single digit has leading zero
+  $day = "Day$day" if $day !~ /^day/i; # Add 'Day' if not present
+
+  require "$day/$day.pl";
+
+  print $day, $opt_part eq 'both' ? "\n" : ': ';
+  if ($part1)
+  {
+    print '  Part 1: ' if $part2;
+    if ($opt_time ne 'no')
+    {
+      $t = [gettimeofday];
+      $day->solve();
+      my $elapsed = tv_interval($t);
+      say '  [Time] ', $elapsed * 10**3, 'ms' if $opt_time eq 'yes';
+      $t_sum += $elapsed if $opt_time eq 'total';
+    }
+    else
+    {
+      $day->solve();
+    }
+  }
+  if ($part2)
+  {
+    print '  Part 2: ' if $part1;
+    if ($opt_time ne 'no')
+    {
+      $t = [gettimeofday];
+      $day->solve(1);
+      my $elapsed = tv_interval($t);
+      say '  [Time] ', $elapsed * 10**3, 'ms' if $opt_time eq 'yes';
+      $t_sum += $elapsed if $opt_time eq 'total';
+    }
+    else
+    {
+      $day->solve(1);
+    }
+  }
+}
+if ($opt_time eq 'total')
+{
+  say "Total time: ${t_sum}s";
+}

@@ -88,5 +88,5 @@ while (my $day = shift)
 }
 if ($opt_time eq 'total')
 {
-  say "Total time: ${t_sum}s";
+  say 'Total time: ', ${t_sum} * 10**3, 'ms';
 }

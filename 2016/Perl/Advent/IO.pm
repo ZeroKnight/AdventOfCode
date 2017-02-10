@@ -38,8 +38,10 @@ sub input
   }
   else
   {
-    local $/;
-    return <$fh>;
+    my $slurp;
+    { local $/; $slurp = <$fh> }
+    chomp $slurp;
+    return $slurp;
   }
 }
 

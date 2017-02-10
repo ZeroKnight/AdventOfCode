@@ -18,7 +18,7 @@ sub solve
   my %seen;
   my ($x, $y) = (0, 0);
 
-  STEP: foreach my $step (input($day, ', '))
+  STEP: foreach my $step (input($day, qr/, /))
   {
     my $dir   = substr($step, 0, 1);
     my $count = substr($step, 1);
